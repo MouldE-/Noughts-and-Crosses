@@ -8,7 +8,7 @@
             Case players1.Checked()
                 MessageBox.Show("1 Player Selected!")
             Case players2.Checked()
-                MessageBox.Show("2 Players Selected!")
+                Game.Show()
             Case Else
                 MessageBox.Show("ERROR DETECTED!")
         End Select
