@@ -1,17 +1,13 @@
-﻿Public Class Launcher
+﻿' Title: Form1.vb
+' Author: Timothy Revans
+' Description: A form used as a launcher to select the number of players for the game
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles startButton.Click
+Public Class Launcher
 
-        Select Case True
-            Case players0.Checked()
-                MessageBox.Show("0 Players Selected!")
-            Case players1.Checked()
-                MessageBox.Show("1 Player Selected!")
-            Case players2.Checked()
-                Game.Show()
-            Case Else
-                MessageBox.Show("ERROR DETECTED!")
-        End Select
+    ' a subroutine to load up the second form
+    Private Sub StartButton_Clicked(sender As Object, e As EventArgs) Handles startButton.Click
+
+        Game.Show()
 
     End Sub
 
