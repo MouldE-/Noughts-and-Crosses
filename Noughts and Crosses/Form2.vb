@@ -4,14 +4,16 @@
 
 Public Class Game
 
-    ' a variable to store the current player, with "O" being player 1
-    Public player As Char = "O"
+    Property Player() As Char = "O"
 
     ' a variable to store the number of players in the game (possibly not needed)
     Private players As Integer
 
     ' an array to store the grid of buttons
-    Private grid(,) As Part
+    Public grid(,) As Part
+
+    Private bot1 As Bot
+    Private bot2 As Bot
 
     ' a sub to check if the game has been won, and update playerLabel's text if it has not
     Sub Check_Win()
@@ -67,6 +69,8 @@ Public Class Game
         ' displays messages if game has finished, then closes the form
         If finished Then
 
+            botTimer.Stop()
+
             If winner = "A" Then
 
                 MessageBox.Show("It's a draw!")
@@ -78,10 +82,25 @@ Public Class Game
             End If
 
             Close()
+
         Else
 
             ' updates playerLabel if not finished
-            playerLabel.Text = "Player: " & player
+            playerLabel.Text = "Player: " & Player
+
+            If players = 1 Then
+
+                If Player = "X" Then
+
+                    botTimer.Start()
+
+                Else
+
+                    botTimer.Stop()
+
+                End If
+
+            End If
 
         End If
 
@@ -100,8 +119,13 @@ Public Class Game
         Select Case True
             Case Launcher.players0.Checked
                 players = 0
+                bot1 = New Bot()
+                bot2 = New Bot()
+                botTimer.Start()
+                Check_Win()
             Case Launcher.players1.Checked
                 players = 1
+                bot1 = New Bot()
             Case Launcher.players2.Checked
                 players = 2
             Case Else
@@ -115,6 +139,21 @@ Public Class Game
     Private Sub Game_Close(sender As Object, e As EventArgs) Handles MyBase.Closed
 
         Launcher.Enabled = True
+
+    End Sub
+
+    Private Sub BotTimer_Tick(sender As Object, e As EventArgs) Handles botTimer.Tick
+
+        ' make the apropriate bot play
+        If Player = "X" Then
+
+            bot1.Play()
+
+        ElseIf Player = "O" Then
+
+            bot2.Play()
+
+        End If
 
     End Sub
 

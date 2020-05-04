@@ -22,6 +22,7 @@ Partial Class Launcher
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Launcher))
         Me.startButton = New System.Windows.Forms.Button()
         Me.players0 = New System.Windows.Forms.RadioButton()
         Me.players2 = New System.Windows.Forms.RadioButton()
@@ -81,6 +82,7 @@ Partial Class Launcher
         Me.Controls.Add(Me.players0)
         Me.Controls.Add(Me.startButton)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Launcher"

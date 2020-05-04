@@ -22,7 +22,10 @@ Partial Class Game
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Game))
         Me.playerLabel = New System.Windows.Forms.Label()
+        Me.botTimer = New System.Windows.Forms.Timer(Me.components)
         Me.Part9 = New Noughts_and_Crosses.Part()
         Me.Part8 = New Noughts_and_Crosses.Part()
         Me.Part7 = New Noughts_and_Crosses.Part()
@@ -43,6 +46,10 @@ Partial Class Game
         Me.playerLabel.Size = New System.Drawing.Size(89, 25)
         Me.playerLabel.TabIndex = 17
         Me.playerLabel.Text = "Player: O"
+        '
+        'botTimer
+        '
+        Me.botTimer.Interval = 1000
         '
         'Part9
         '
@@ -159,6 +166,7 @@ Partial Class Game
         Me.Controls.Add(Me.Part1)
         Me.Controls.Add(Me.Part2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Game"
@@ -178,4 +186,5 @@ Partial Class Game
     Friend WithEvents Part8 As Part
     Friend WithEvents Part9 As Part
     Friend WithEvents playerLabel As Label
+    Friend WithEvents botTimer As Timer
 End Class

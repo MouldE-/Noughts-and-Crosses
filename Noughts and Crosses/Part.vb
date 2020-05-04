@@ -2,7 +2,7 @@
 ' Author: Timothy Revans
 ' Description: A class used as the buttons on the windows form that contain the Os and Xs
 
-Class Part
+Public Class Part
 
     ' inherits the pre-existing properties of a button
     Inherits Button
@@ -14,23 +14,24 @@ Class Part
         If Text = "" Then
 
             ' set the text of the button to the current player
-            Text = Game.player
+            Text = Game.Player
+            Refresh()
 
             ' change the current player
-            If Game.player = "X" Then
+            If Game.Player = "X" Then
 
-                Game.player = "O"
+                Game.Player = "O"
 
             Else
 
-                Game.player = "X"
+                Game.Player = "X"
 
             End If
 
-        End If
+            ' check if the game has been won
+            Game.Check_Win()
 
-        ' check if the game has been won
-        Game.Check_Win()
+        End If
 
     End Sub
 
