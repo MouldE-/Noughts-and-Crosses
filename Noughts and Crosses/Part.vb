@@ -10,28 +10,26 @@ Public Class Part
     ' a subroutine to describe the behaviour of the button being clicked
     Private Sub Clicked(sender As Object, e As EventArgs) Handles Me.Click
 
-        ' check if the button has been pressed
-        If Text = "" Then
+        ' disable this button
+        Enabled = False
 
-            ' set the text of the button to the current player
-            Text = Game.Player
-            Refresh()
+        ' set the text of the button to the current player
+        Text = Game.Player
+        Refresh()
 
-            ' change the current player
-            If Game.Player = "X" Then
+        ' change the current player
+        If Game.Player = "X" Then
 
-                Game.Player = "O"
+            Game.Player = "O"
 
-            Else
+        Else
 
-                Game.Player = "X"
-
-            End If
-
-            ' check if the game has been won
-            Game.Check_Win()
+            Game.Player = "X"
 
         End If
+
+        ' check if the game has been won
+        Game.Check_Win()
 
     End Sub
 

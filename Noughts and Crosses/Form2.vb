@@ -93,10 +93,12 @@ Public Class Game
                 If Player = "X" Then
 
                     botTimer.Start()
+                    Disable_Grid()
 
                 Else
 
                     botTimer.Stop()
+                    Enable_Grid()
 
                 End If
 
@@ -119,6 +121,7 @@ Public Class Game
         Select Case True
             Case Launcher.players0.Checked
                 players = 0
+                Disable_Grid()
                 bot1 = New Bot()
                 bot2 = New Bot()
                 botTimer.Start()
@@ -142,18 +145,55 @@ Public Class Game
 
     End Sub
 
+    ' a subroutine to time the bots actions
     Private Sub BotTimer_Tick(sender As Object, e As EventArgs) Handles botTimer.Tick
+
+        ' enable the grid so the bot can use it
+        Enable_Grid()
 
         ' make the apropriate bot play
         If Player = "X" Then
 
             bot1.Play()
 
-        ElseIf Player = "O" Then
+        Else
 
             bot2.Play()
 
         End If
+
+        ' disable the grid again if there are no players
+        If players = 0 Then
+
+            Disable_Grid()
+
+        End If
+
+    End Sub
+
+    ' a subroutine to enable the buttons in the grid that have not been pressed
+    Private Sub Enable_Grid()
+
+        For Each item In grid
+
+            If item.Text = "" Then
+
+                item.Enabled = True
+
+            End If
+
+        Next
+
+    End Sub
+
+    ' a subroutine to disable all of the buttons in the grid
+    Private Sub Disable_Grid()
+
+        For Each item In grid
+
+            item.Enabled = False
+
+        Next
 
     End Sub
 
