@@ -111,9 +111,6 @@ Public Class Game
     ' a sub to set up the game once the form is loaded
     Private Sub Game_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        ' disable the launcher
-        Launcher.Enabled = False
-
         ' store all the buttons in a 2-dimensional array
         grid = {{Part1, Part2, Part3}, {Part4, Part5, Part6}, {Part7, Part8, Part9}}
 
@@ -122,13 +119,13 @@ Public Class Game
             Case Launcher.players0.Checked
                 players = 0
                 Disable_Grid()
-                bot1 = New Bot()
-                bot2 = New Bot()
+                bot1 = New Bot("X")
+                bot2 = New Bot("O")
                 botTimer.Start()
                 Check_Win()
             Case Launcher.players1.Checked
                 players = 1
-                bot1 = New Bot()
+                bot1 = New Bot("X")
             Case Launcher.players2.Checked
                 players = 2
             Case Else
@@ -138,18 +135,15 @@ Public Class Game
 
     End Sub
 
-    ' a sub to re-enable the launcher when the form is closed
+    ' a sub to re-show the launcher when the form is closed
     Private Sub Game_Close(sender As Object, e As EventArgs) Handles MyBase.Closed
 
-        Launcher.Enabled = True
+        Launcher.Show()
 
     End Sub
 
     ' a subroutine to time the bots actions
     Private Sub BotTimer_Tick(sender As Object, e As EventArgs) Handles botTimer.Tick
-
-        ' enable the grid so the bot can use it
-        Enable_Grid()
 
         ' make the apropriate bot play
         If Player = "X" Then
@@ -172,7 +166,7 @@ Public Class Game
     End Sub
 
     ' a subroutine to enable the buttons in the grid that have not been pressed
-    Private Sub Enable_Grid()
+    Public Sub Enable_Grid()
 
         For Each item In grid
 

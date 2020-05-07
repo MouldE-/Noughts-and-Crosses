@@ -8,6 +8,7 @@ Public Class Launcher
     Private Sub StartButton_Clicked(sender As Object, e As EventArgs) Handles startButton.Click
 
         Game.Show()
+        Hide()
 
     End Sub
 

@@ -170,8 +170,7 @@ Partial Class Game
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Game"
-        Me.ShowInTaskbar = False
-        Me.Text = "a"
+        Me.Text = "Noughts and Crosses"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
