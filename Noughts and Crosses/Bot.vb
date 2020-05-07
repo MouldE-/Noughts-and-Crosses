@@ -67,27 +67,37 @@ Public Class Bot
                     ' "make" the move
                     charGrid(i, j) = player
 
-                    ' find out the reprocussions of the move
-                    Dim results() As Integer = Find_Best_Move(charGrid, enemy)
+                    If Check_Win(charGrid) = player Then
+
+                        chosenPart = grid(i, j)
+
+                    Else
+
+                        ' find out the reprocussions of the move
+                        Dim results() As Integer = Find_Best_Move(charGrid, enemy)
+
+
+
+                        ' decide if the result is better, with a small element of randomness to make the game feel less repetetive
+                        If results(2) < prevBest(2) OrElse (results(2) = prevBest(2) AndAlso results(0) > prevBest(0)) Then
+
+                            prevBest = results
+                            chosenPart = grid(i, j)
+
+                        End If
+
+                        ' decide if the results are the same, and if so make it a random chance to switch to the new result
+                        If results(0) = prevBest(0) AndAlso results(2) = prevBest(2) AndAlso Rnd() > randomnessFactor Then
+
+                            chosenPart = grid(i, j)
+                            randomnessFactor ^= 2
+
+                        End If
+
+                    End If
 
                     ' undo the move so it does not affect future itterations
                     charGrid(i, j) = vbNullChar
-
-                    ' decide if the result is better, with a small element of randomness to make the game feel less repetetive
-                    If results(2) < prevBest(2) OrElse (results(2) = prevBest(2) AndAlso results(0) > prevBest(0)) Then
-
-                        prevBest = results
-                        chosenPart = grid(i, j)
-
-                    End If
-
-                    ' decide if the results are the same, and if so make it a random chance to switch to the new result
-                    If results(0) = prevBest(0) AndAlso results(2) = prevBest(2) AndAlso Rnd() > randomnessFactor Then
-
-                        chosenPart = grid(i, j)
-                        randomnessFactor ^= 2
-
-                    End If
 
                 End If
 
